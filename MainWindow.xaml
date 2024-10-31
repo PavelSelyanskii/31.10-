@@ -1,0 +1,40 @@
+﻿<Window x:Class="_31._10_СП.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Эмулятор диспетчера процессов" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <Button Content="Добавить процесс" Click="AddProcess_Click" Margin="5"/>
+            <ComboBox x:Name="AlgorithmComboBox" SelectedIndex="0" Margin="5" SelectionChanged="AlgorithmComboBox_SelectionChanged">
+                <ComboBoxItem Content="Приоритетное планирование"/>
+                <ComboBoxItem Content="Round Robin"/>
+                <ComboBoxItem Content="Shortest Job First"/>
+            </ComboBox>
+        </StackPanel>
+
+        <ListBox x:Name="ProcessListBox" Grid.Row="1" Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} (Приоритет: {1}, Осталось: {2}, Состояние: {3})">
+                                <Binding Path="Name"/>
+                                <Binding Path="Priority"/>
+                                <Binding Path="RemainingTime"/>
+                                <Binding Path="State"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock x:Name="StatusTextBlock" Grid.Row="2" Margin="5" TextWrapping="Wrap"/>
+    </Grid>
+</Window>
